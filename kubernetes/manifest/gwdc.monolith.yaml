@@ -140,6 +140,12 @@ spec:
         image: wordpress:latest
         ports:
          - containerPort: 80
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - all
         env:
         - name: WORDPRESS_DB_HOST
           value: gwdc-db
