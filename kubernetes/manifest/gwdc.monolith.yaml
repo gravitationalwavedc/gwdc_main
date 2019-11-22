@@ -1,0 +1,180 @@
+---
+# PersistentVolume - NFS
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gwdc-nfs-pv-db
+  namespace: gwdc
+  labels:
+    volume: gwdc-nfs-volume-db
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    server: 10.8.0.37
+    path: "/mnt/sharedfolder/gwdc/db_data"
+---
+# PersistentVolumeClaim - NFS
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs-pvc-db
+  namespace: gwdc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      volume: gwdc-nfs-volume-db
+---
+# db
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gwdc-db
+  labels:
+    name: gwdc-db
+  namespace: gwdc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: gwdc-db
+    spec:
+      containers:
+      - name: gwdc-db
+        image: mysql:5.7
+        ports:
+        - name: mysql
+          containerPort: 3306
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: somewordpress
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: wordpress
+        - name: MYSQL_PASSWORD
+          value: wordpress
+        volumeMounts:
+          - name: nfs-mysql-data
+            mountPath: "/var/lib/mysql"
+      volumes:
+      - name: nfs-mysql-data
+        persistentVolumeClaim:
+          claimName: nfs-pvc-db
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+# mysql service
+apiVersion: v1
+kind: Service
+metadata:
+  name: gwdc-db
+  labels:
+    name: gwdc-db
+  namespace: gwdc
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 3306
+    targetPort: 3306
+  selector:
+    name: gwdc-db
+---
+# PersistentVolume - NFS
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gwdc-nfs-pv-app
+  labels:
+    volume: gwdc-nfs-volume-app
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    server: 10.8.0.37
+    path: "/mnt/sharedfolder/gwdc/wp_html"
+---
+# PersistentVolumeClaim - NFS
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs-pvc-app
+  namespace: gwdc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      volume: gwdc-nfs-volume-app
+---
+# webapp deployment
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gwdc-web
+  labels:
+    name: gwdc-web
+  namespace: gwdc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: gwdc-web
+    spec:
+      containers:
+      - name: gwdc-web
+        image: wordpress:latest
+        ports:
+         - containerPort: 80
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: gwdc-db
+        - name: WORDPRESS_DB_USER
+          value: wordpress
+        - name: WORDPRESS_DB_PASSWORD
+          value: wordpress
+        - name: WORDPRESS_DB_NAME
+          value: wordpress
+        volumeMounts:
+          - name: nfs-wordpress-html
+            mountPath: "/var/www/html/wp-content"
+      volumes:
+      - name: nfs-wordpress-html
+        persistentVolumeClaim:
+          claimName: nfs-pvc-app
+      restartPolicy: Always
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+---
+# wordpress
+apiVersion: v1
+kind: Service
+metadata:
+  name: gwdc-web
+  labels:
+    name: gwdc-web
+  namespace: gwdc
+spec:
+  type: NodePort
+  ports:
+  - name: gwdc-web
+    port: 80
+    targetPort: 80
+    nodePort: 30662
+  selector:
+    name: gwdc-web
+...
