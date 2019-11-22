@@ -81,7 +81,6 @@ metadata:
     name: gwdc-db
   namespace: gwdc
 spec:
-  clusterIP: 10.233.49.232
   ports:
     # the port that this service should serve on
   - port: 3306
@@ -143,7 +142,7 @@ spec:
          - containerPort: 80
         env:
         - name: WORDPRESS_DB_HOST
-          value: 10.233.49.232
+          value: gwdc-db
         - name: WORDPRESS_DB_USER
           value: wordpress
         - name: WORDPRESS_DB_PASSWORD
