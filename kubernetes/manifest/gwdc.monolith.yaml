@@ -141,7 +141,6 @@ spec:
         ports:
          - containerPort: 80
         securityContext:
-          runAsNonRoot: true
           capabilities:
             drop:
               - all
