@@ -5,6 +5,8 @@ kind: Service
 metadata:
   namespace: gwdc
   name: gwdc-web
+  labels:
+    name: gwdc-web
 spec:
   type: ClusterIP
   ports:
@@ -12,5 +14,4 @@ spec:
     port: 80
     targetPort: 80
   selector:
-    app: gwdc
-    role: web
+    name: gwdc-web

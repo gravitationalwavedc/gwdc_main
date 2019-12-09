@@ -38,15 +38,13 @@ metadata:
   name: gwdc-db
   namespace: gwdc
   labels:
-    app: gwdc
-    role: database
+    name: gwdc-db
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: gwdc
-        role: database
+        name: gwdc-db
     spec:
       containers:
       - name: mysql
@@ -77,12 +75,13 @@ kind: Service
 metadata:
   name: gwdc-db
   namespace: gwdc
+  labels:
+    name: gwdc-db
 spec:
   ports:
   - name: gwdc-db
     port: 3306
     targetPort: 3306
   selector:
-    app: gwdc
-    role: database
+    name: gwdc-db
 ...

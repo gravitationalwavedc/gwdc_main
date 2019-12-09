@@ -38,15 +38,13 @@ metadata:
   name: gwdc-web
   namespace: gwdc
   labels:
-    app: gwdc
-    role: web
+    name: gwdc-web
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: gwdc
-        role: web
+        name: gwdc-web
     spec:
       containers:
       - name: gwdc-web
