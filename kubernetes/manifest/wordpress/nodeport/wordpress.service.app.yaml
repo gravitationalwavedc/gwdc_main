@@ -1,0 +1,22 @@
+---
+# wordpress
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: gwdc-web
+  name: gwdc-web
+  namespace: gwdc
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31003
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    name: gwdc-web
+  nodeSelector:
+    kubernetes.io/hostname: deployment-3
+  sessionAffinity: None
+  type: NodePort
