@@ -55,13 +55,7 @@ spec:
         ports:
         - name: port-mysql
           containerPort: 3306
-        resources:
-          requests:
-            memory: "256Mi"
-            cpu: "1000m"
-          limits:
-            memory: "512Mi"
-            cpu: "2000m"
+        resources: {}
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: somewordpress
