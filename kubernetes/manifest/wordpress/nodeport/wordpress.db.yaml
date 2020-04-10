@@ -10,7 +10,7 @@ spec:
   accessModes:
   - ReadWriteMany
   capacity:
-    storage: 2Gi
+    storage: 10Gi
   nfs:
     server: 10.8.41.12
     path: "/mnt/sharedfolder/gwdc/db_data"
@@ -26,7 +26,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 2Gi
+      storage: 10Gi
   selector:
     matchLabels:
       volume: gwdc-nfs-volume-db
@@ -55,6 +55,14 @@ spec:
         ports:
         - name: port-mysql
           containerPort: 3306
+        resources: 
+          requests:
+            cpu: "55500m"
+            memory: "10Gi"
+          limits:
+            cpu: "55500m"
+            memory: "10Gi"
+        tty: true
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: somewordpress
