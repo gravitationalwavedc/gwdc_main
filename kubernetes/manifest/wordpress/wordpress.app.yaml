@@ -12,7 +12,7 @@ spec:
   capacity:
     storage: 1Gi
   nfs:
-    server: 10.8.0.37
+    server: 10.8.0.12
     path: "/mnt/sharedfolder/gwdc/wp_html"
 ---
 # PersistentVolumeClaim - NFS
@@ -32,7 +32,7 @@ spec:
       volume: gwdc-nfs-volume-app
 ---
 # webapp deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gwdc-web
@@ -41,6 +41,9 @@ metadata:
     name: gwdc-web
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: gwdc-web
   template:
     metadata:
       labels:

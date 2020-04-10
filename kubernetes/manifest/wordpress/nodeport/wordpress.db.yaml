@@ -32,7 +32,7 @@ spec:
       volume: gwdc-nfs-volume-db
 ---
 # db
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: gwdc-db
@@ -41,6 +41,9 @@ metadata:
     name: gwdc-db
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: gwdc-db
   template:
     metadata:
       labels:
