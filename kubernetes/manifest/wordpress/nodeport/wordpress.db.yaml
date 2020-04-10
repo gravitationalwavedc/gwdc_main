@@ -55,7 +55,6 @@ spec:
         ports:
         - name: port-mysql
           containerPort: 3306
-        resources: {}
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: somewordpress
