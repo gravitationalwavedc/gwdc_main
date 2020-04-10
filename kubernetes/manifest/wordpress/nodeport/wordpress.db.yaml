@@ -57,10 +57,10 @@ spec:
           containerPort: 3306
         resources: 
           requests:
-            cpu: "55500m"
+            cpu: "5500m"
             memory: "10Gi"
           limits:
-            cpu: "55500m"
+            cpu: "5500m"
             memory: "10Gi"
         tty: true
         env:
