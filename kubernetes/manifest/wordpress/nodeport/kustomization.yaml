@@ -13,7 +13,7 @@ resources:
   - gwdc.db.pv.yaml
   # - gwdc.db.pvc.yaml
   # - gwdc.db.dep.yaml
-  # - gwdc.db.svc.yaml
+  - gwdc.db.svc.yaml
   - gwdc.db.stateful-set.yaml
   - gwdc.wp.pv.yaml
   - gwdc.wp.pvc.yaml
