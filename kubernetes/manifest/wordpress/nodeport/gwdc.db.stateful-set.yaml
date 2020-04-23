@@ -84,9 +84,9 @@ spec:
     type: RollingUpdate
   volumeClaimTemplates:
     - metadata:
-      labels:
-        name: gwdc-db
-      name: nfs-mysql-data
+        labels:
+          name: gwdc-db
+        name: nfs-mysql-data
       spec:
         accessModes:
           - ReadWriteMany
