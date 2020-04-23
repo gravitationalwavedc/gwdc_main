@@ -1,0 +1,17 @@
+---
+# PersistentVolumeClaim - NFS
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: nfs-pvc-db
+  namespace: gwdc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  selector:
+    matchLabels:
+      volume: gwdc-nfs-volume-db
+...

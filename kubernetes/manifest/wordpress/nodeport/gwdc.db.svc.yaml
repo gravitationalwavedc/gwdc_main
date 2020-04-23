@@ -1,0 +1,17 @@
+---
+# mysql service
+apiVersion: v1
+kind: Service
+metadata:
+  name: gwdc-db
+  namespace: gwdc
+  labels:
+    name: gwdc-db
+spec:
+  ports:
+    - name: gwdc-db
+      port: 3306
+      targetPort: 3306
+  selector:
+    name: gwdc-db
+...

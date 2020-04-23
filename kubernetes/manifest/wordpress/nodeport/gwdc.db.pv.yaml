@@ -1,0 +1,17 @@
+---
+# PersistentVolume - NFS
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: gwdc-nfs-pv-db
+  labels:
+    volume: gwdc-nfs-volume-db
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  nfs:
+    server: 10.8.0.37
+    path: "/mnt/sharedfolder/gwdc/db_data"
+...
