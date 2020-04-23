@@ -95,5 +95,5 @@ spec:
             storage: 1Gi
         selector:
           matchLabels:
-            volume: gwdc-nfs-volume-db
+            volume: gwdc-db
 ...

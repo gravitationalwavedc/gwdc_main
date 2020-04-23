@@ -3,9 +3,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: gwdc-nfs-pv-db
+  name: gwdc-db
   labels:
-    volume: gwdc-nfs-volume-db
+    volume: gwdc-db
 spec:
   accessModes:
     - ReadWriteMany
