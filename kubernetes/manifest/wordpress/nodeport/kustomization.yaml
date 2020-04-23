@@ -9,7 +9,7 @@ secretGenerator:
       - db_app_user=wordpress
       - db_app_pass=wordpress
 resources:
-  - ns.yaml
+  - gwdc.ns.yaml
   - gwdc.db.pv.yaml
   # - gwdc.db.pvc.yaml
   # - gwdc.db.dep.yaml
