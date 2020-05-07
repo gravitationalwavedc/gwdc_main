@@ -13,6 +13,7 @@ spec:
     matchLabels:
       name: gwdc-web
   template:
+    metadata:
       labels:
         name: gwdc-web
     spec:
