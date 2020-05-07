@@ -13,9 +13,6 @@ spec:
     matchLabels:
       name: gwdc-web
   template:
-    metadata:
-      annotations:
-        recipients.argocd-notifications.argoproj.io: "slack:#gwcloud-logs-argocd"
       labels:
         name: gwdc-web
     spec:
