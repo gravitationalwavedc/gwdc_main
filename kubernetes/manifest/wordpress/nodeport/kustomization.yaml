@@ -1,15 +1,9 @@
 ---
-secretGenerator:
-  - name: mysql-pass
-    namespace: gwdc
-    literals:
-      - db_host=gwdc-db
-      - db_root_pass=mysql-pass
-      - db_app_name=wordpress
-      - db_app_user=wordpress
-      - db_app_pass=wordpress
 resources:
   - gwdc.ns.yaml
+  - cron.creds.yaml
+  - gwdc.sa.yaml
+  - gwdc.rbac.yaml
   - gwdc.db.pv.yaml
   # - gwdc.db.pvc.yaml
   # - gwdc.db.dep.yaml

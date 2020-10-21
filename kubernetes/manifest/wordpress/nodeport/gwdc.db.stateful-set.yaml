@@ -28,14 +28,26 @@ spec:
               weight: 1
       containers:
         - env:
-            - name: MYSQL_ROOT_PASSWORD
-              value: somewordpress
-            - name: MYSQL_DATABASE
-              value: wordpress
             - name: MYSQL_USER
-              value: wordpress
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DB_USER
+            - name: MYSQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DB_NAME
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: MYSQL_ROOT_PASSWORD
             - name: MYSQL_PASSWORD
-              value: wordpress
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress
+                  key: WORDPRESS_DB_PASSWORD
           image: mysql:5.7
           imagePullPolicy: IfNotPresent
           livenessProbe:
