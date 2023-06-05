@@ -30,6 +30,7 @@ spec:
   selector:
     matchLabels:
       volume: gwdc-nfs-volume-db
+  storageClassName: ""
 ---
 # db
 apiVersion: apps/v1

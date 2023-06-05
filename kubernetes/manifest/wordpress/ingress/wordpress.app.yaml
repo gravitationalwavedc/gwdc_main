@@ -30,6 +30,7 @@ spec:
   selector:
     matchLabels:
       volume: gwdc-nfs-volume-app
+  storageClassName: ""
 ---
 # webapp deployment
 apiVersion: apps/v1
