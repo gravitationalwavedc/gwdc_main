@@ -58,15 +58,9 @@ spec:
           containerPort: 80
         resources: {}
         tty: true
-        env:
-        - name: WORDPRESS_DB_HOST
-          value: gwdc-db
-        - name: WORDPRESS_DB_USER
-          value: wordpress
-        - name: WORDPRESS_DB_PASSWORD
-          value: wordpress
-        - name: WORDPRESS_DB_NAME
-          value: wordpress
+        envFrom:
+          - secretRef:
+              name: config
         volumeMounts:
           - name: nfs-wordpress-html
             mountPath: "/var/www/html/wp-content"

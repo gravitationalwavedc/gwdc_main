@@ -13,3 +13,4 @@ resources:
     - wordpress.app.yaml
     - wordpress.db.yaml
     - wordpress.service.app.yaml
+    - wordpress.secrets-integrator.yaml

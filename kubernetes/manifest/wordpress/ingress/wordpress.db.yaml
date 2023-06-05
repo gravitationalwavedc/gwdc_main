@@ -58,13 +58,26 @@ spec:
           containerPort: 3306
         env:
         - name: MYSQL_ROOT_PASSWORD
-          value: somewordpress
+          valueFrom:
+            secretKeyRef:
+              name: config
+              key: MYSQL_ROOT_PASSWORD
         - name: MYSQL_DATABASE
-          value: wordpress
+          valueFrom:
+            secretKeyRef:
+              name: config
+              key: WORDPRESS_DB_NAME
         - name: MYSQL_USER
-          value: wordpress
+          valueFrom:
+            secretKeyRef:
+              name: config
+              key: WORDPRESS_DB_USER
         - name: MYSQL_PASSWORD
-          value: wordpress
+          valueFrom:
+            secretKeyRef:
+              name: config
+              key: WORDPRESS_DB_PASSWORD
+        resources: {}
         volumeMounts:
           - name: nfs-mysql-data
             mountPath: "/var/lib/mysql"
