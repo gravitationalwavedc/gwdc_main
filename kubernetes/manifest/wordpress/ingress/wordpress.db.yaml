@@ -13,7 +13,7 @@ spec:
     storage: 10Gi
   nfs:
     server: 10.8.41.12
-    path: "/mnt/sharedfolder/gwdc/db_data"
+    path: "/mnt/sharedfolder/gwdc/wordpress/db/"
 ---
 # PersistentVolumeClaim - NFS
 kind: PersistentVolumeClaim
