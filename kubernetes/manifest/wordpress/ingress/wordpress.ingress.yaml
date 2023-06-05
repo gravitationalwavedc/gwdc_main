@@ -12,20 +12,10 @@ spec:
   - host: gwdc.org.au
     http:
       paths:
-      - path: /
-        backend:
+      - backend:
           service:
             name: gwdc-web
-            port: 80
-  - rules:
-    - host: vault.gwdc.org.au
-      http:
-        paths:
-          - backend:
-              service:
-                name: vault
-                port:
-                  number: 8200
-            path: /
-            pathType: Prefix
+            port: 
+              number: 80
+        pathType: Prefix
 ...
