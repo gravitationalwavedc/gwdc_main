@@ -12,5 +12,6 @@ resources:
     - wordpress.ingress.yaml
     - wordpress.app.yaml
     - wordpress.db.yaml
+    - wordpress.rbac.yaml
     - wordpress.service.app.yaml
     - wordpress.secrets-integrator.yaml
